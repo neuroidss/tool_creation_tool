@@ -153,10 +153,10 @@ else:
 ## Python
 
 See the examples/ directory for more detailed use cases:
-example_create_execute.py: Demonstrates basic creation and execution.
-example_repair_tool.py: Shows automatic repair triggering when a tool fails.
-example_improve_tool.py: Illustrates modifying an existing tool based on a request.
-example_self_repair.py: Conceptual demo of library self-repair (prints proposed code, does not apply it).
+*   **example_create_execute.py**: Demonstrates basic creation and execution.
+*   **example_repair_tool.py**: Shows automatic repair triggering when a tool fails.
+*   **example_improve_tool.py**: Illustrates modifying an existing tool based on a request.
+*   **example_self_repair.py**: Conceptual demo of library self-repair (prints proposed code, does not apply it).
 
 ## Unique Competitive Advantage & Examples
 
