@@ -11,7 +11,7 @@ from tool_creation_tool import ToolManager, LLMInterface, ToolStorage
 from dotenv import load_dotenv
 load_dotenv()
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
-# Use a highly capable model for code modification, e.g., GPT-4
+# Use a highly capable model for code modification, e.g., Deepseek
 # Adjust LLM_INTERFACE_MODEL in .env if needed
 
 # --- Initialization ---
