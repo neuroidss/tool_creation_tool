@@ -10,7 +10,7 @@ from typing import List, Dict, Optional, Literal
 from dotenv import load_dotenv
 load_dotenv()
 
-LLMProvider = Literal["openai", "ollama", "vllm", "generic_openai"]
+LLMProvider = Literal["ollama", "vllm", "generic_openai"]
 
 class LLMInterface:
     """
@@ -19,21 +19,19 @@ class LLMInterface:
     """
     def __init__(
         self,
-        provider: LLMProvider = "openai",
+        provider: LLMProvider = "ollama",
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
         model: Optional[str] = None,
     ):
-        self.provider = provider or os.getenv("LLM_PROVIDER", "openai")
+        self.provider = provider or os.getenv("LLM_PROVIDER", "ollama")
         self.api_key = api_key or os.getenv(f"{self.provider.upper()}_API_KEY")
         self.base_url = base_url or os.getenv(f"{self.provider.upper()}_BASE_URL")
         self.model = model or os.getenv(f"{self.provider.upper()}_MODEL")
 
         if not self.model:
             # Provide default models if not specified
-            if self.provider == "openai":
-                self.model = "gpt-4-turbo-preview"
-            elif self.provider == "ollama":
+            if self.provider == "ollama":
                 self.model = "llama3" # Common default, adjust as needed
             elif self.provider == "vllm":
                 self.model = "meta-llama/Llama-2-7b-chat-hf" # Example, adjust
@@ -41,10 +39,8 @@ class LLMInterface:
                  self.model = os.getenv("GENERIC_OPENAI_MODEL", "default-model")
 
 
-        if self.provider in ["openai", "vllm", "generic_openai"] and not self.base_url:
-             if self.provider == "openai":
-                 self.base_url = "https://api.openai.com/v1"
-             elif self.provider == "vllm":
+        if self.provider in ["vllm", "generic_openai"] and not self.base_url:
+             if self.provider == "vllm":
                   # vLLM typically runs locally, requires user-set base URL
                   raise ValueError("VLLM_BASE_URL must be set in environment or passed for vLLM provider")
              # For generic_openai, base_url is expected
@@ -55,10 +51,7 @@ class LLMInterface:
         self.client = None
         if self.provider in ["openai", "vllm", "generic_openai"]:
             # Use OpenAI client for compatible APIs
-             # For OpenAI, key is required. For others, it might be optional ("None", "no_key", etc.)
             effective_api_key = self.api_key if self.api_key else "None"
-            if self.provider == "openai" and effective_api_key == "None":
-                 raise ValueError("OPENAI_API_KEY must be set for OpenAI provider")
 
             self.client = OpenAI(
                 api_key=effective_api_key,
@@ -87,7 +80,7 @@ class LLMInterface:
         try:
             if self.provider == "ollama":
                 return self._get_ollama_completion(messages, max_tokens, temperature, json_mode)
-            elif self.client: # OpenAI, vLLM, generic_openai
+            elif self.client: # vLLM, generic_openai
                 return self._get_openai_compatible_completion(messages, max_tokens, temperature, json_mode)
             else:
                 print(f"Error: Provider '{self.provider}' not properly configured.")
