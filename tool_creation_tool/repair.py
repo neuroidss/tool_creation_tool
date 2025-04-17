@@ -208,26 +208,26 @@ Returns:
         "improvement_summary": parsed_response.get("improvement_summary", "No summary provided.")
     }
 
- # If name changed, potentially delete old entry? Or handle as rename?
- # For now, upsert will overwrite if ID matches, or create new if name (and thus ID) changes.
- # Let's force using the *original* name for the update to avoid proliferation unless explicitly renaming.
-update_name = original_tool["tool_name"]
-if updated_tool_data["tool_name"] != update_name:
-    print(f"Warning: LLM suggested renaming tool to '{updated_tool_data['tool_name']}', but sticking to original name '{update_name}' for update.")
-    updated_tool_data["tool_name"] = update_name
+     # If name changed, potentially delete old entry? Or handle as rename?
+     # For now, upsert will overwrite if ID matches, or create new if name (and thus ID) changes.
+     # Let's force using the *original* name for the update to avoid proliferation unless explicitly renaming.
+    update_name = original_tool["tool_name"]
+    if updated_tool_data["tool_name"] != update_name:
+        print(f"Warning: LLM suggested renaming tool to '{updated_tool_data['tool_name']}', but sticking to original name '{update_name}' for update.")
+        updated_tool_data["tool_name"] = update_name
 
 
-# Store the updated tool
-storage.add_or_update_tool(
-    tool_name=updated_tool_data["tool_name"],
-    code=updated_tool_data["code"],
-    description=updated_tool_data["description"],
-    parameters=updated_tool_data["parameters"],
-    version=updated_tool_data["version"],
-    error_log=updated_tool_data["error_log"] # Persist error log
-)
+    # Store the updated tool
+    storage.add_or_update_tool(
+        tool_name=updated_tool_data["tool_name"],
+        code=updated_tool_data["code"],
+        description=updated_tool_data["description"],
+        parameters=updated_tool_data["parameters"],
+        version=updated_tool_data["version"],
+        error_log=updated_tool_data["error_log"] # Persist error log
+    )
 
-print(f"Tool '{update_name}' successfully improved and updated to version {updated_tool_data['version']}.")
-print(f"LLM Improvement Summary: {updated_tool_data['improvement_summary']}")
-return updated_tool_data
+    print(f"Tool '{update_name}' successfully improved and updated to version {updated_tool_data['version']}.")
+    print(f"LLM Improvement Summary: {updated_tool_data['improvement_summary']}")
+    return updated_tool_data
 
