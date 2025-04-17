@@ -183,7 +183,7 @@ Contributions are welcome! Please feel free to submit pull requests or open issu
 
 ## License
 
-This project is licensed under the AGPL-3.0 License - see the LICENSE file for details (You would need to create a LICENSE file with the AGPL-3.0 license text).
+This project is licensed under the AGPL-3.0 License - see the LICENSE file for details.
 
 ## vibe coding prompt
 
