@@ -80,7 +80,7 @@ class LLMInterface:
         try:
             if self.provider == "ollama":
                 return self._get_ollama_completion(messages, max_tokens, temperature, json_mode)
-            elif self.client: # OpenAI, vLLM, generic_openai
+            elif self.client: # vLLM, generic_openai
                 return self._get_openai_compatible_completion(messages, max_tokens, temperature, json_mode)
             else:
                 print(f"Error: Provider '{self.provider}' not properly configured.")
@@ -98,7 +98,7 @@ class LLMInterface:
     def _get_openai_compatible_completion(
         self, messages: List[Dict[str, str]], max_tokens: int, temperature: float, json_mode: bool
     ) -> Optional[str]:
-        """Handles OpenAI and compatible API calls."""
+        """Handles OpenAI compatible API calls."""
         completion_kwargs = {
             "model": self.model,
             "messages": messages,
