@@ -16,18 +16,10 @@ Tool Name: {tool_data.get('tool_name', 'Unknown')}
 Current Version: {tool_data.get('version', 1)}
 Description: {tool_data.get('description', 'No description provided.')}
 Parameters: {json.dumps(tool_data.get('parameters', {}), indent=2)}
-
 Current Code:
-```python
 {tool_data.get('code', '# No code provided')}
-content_copy
-download
-Use code with caution.Python
 Error Encountered:
 {error_message}
-content_copy
-download
-Use code with caution.
 Task:
 Analyze the error message and the current code.
 Identify the cause of the error.
@@ -40,7 +32,6 @@ Respond ONLY with a JSON object containing the corrected tool information. The J
 "parameters": (dict) The original or updated parameter schema.
 "fix_explanation": (string) A brief explanation of the fix applied.
 
-
 Example JSON Response Format:
 {{
   "tool_name": "{tool_data.get('tool_name', 'example_tool')}",
@@ -49,9 +40,7 @@ Example JSON Response Format:
   "parameters": {{ "param1": {{"type": "string"}}, "param2": {{"type": "integer", "optional": true}} }},
   "fix_explanation": "Added a check for None before accessing attribute X."
 }}
-content_copy
-download
-Use code with caution.Json
+
 Provide ONLY the JSON object in your response.
 """
 return prompt.strip()
@@ -65,9 +54,6 @@ Description: {tool_data.get('description', 'No description provided.')}
 Parameters: {json.dumps(tool_data.get('parameters', {}), indent=2)}
 Current Code:
 {tool_data.get('code', '# No code provided')}
-content_copy
-download
-Use code with caution.Python
 User's Improvement Request:
 {improvement_request}
 Task:
@@ -82,7 +68,6 @@ Respond ONLY with a JSON object containing the improved tool information. The JS
 "parameters": (dict) The updated parameter schema.
 "improvement_summary": (string) A brief summary of the changes made.
 
-
 Example JSON Response Format:
 {{
   "tool_name": "{tool_data.get('tool_name', 'example_tool')}",
@@ -91,9 +76,7 @@ Example JSON Response Format:
   "parameters": {{ "param1": {{"type": "string"}}, "new_param": {{"type": "string", "optional": true}} }},
   "improvement_summary": "Added an optional parameter 'new_param' and corresponding logic."
 }}
-content_copy
-download
-Use code with caution.Json
+
 Provide ONLY the JSON object in your response.
 """
 return prompt.strip()
