@@ -24,7 +24,7 @@ echo "with your LLM provider details (API keys, endpoints, models)."
 echo "Example .env content:"
 echo '
 # --- Example .env ---
-LLM_PROVIDER="ollama" # Or "openai", "vllm", etc.
+LLM_PROVIDER="ollama" # Or "vllm", etc.
 
 # Ollama Example (if Ollama running locally)
 OLLAMA_API_KEY="None"
