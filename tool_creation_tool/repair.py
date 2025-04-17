@@ -16,7 +16,9 @@ Current Version: {tool_data.get('version', 1)}
 Description: {tool_data.get('description', 'No description provided.')}
 Parameters: {json.dumps(tool_data.get('parameters', {}), indent=2)}
 Current Code:
+```python
 {tool_data.get('code', '# No code provided')}
+```
 Error Encountered:
 {error_message}
 Task:
@@ -32,6 +34,7 @@ Respond ONLY with a JSON object containing the corrected tool information. The J
 "fix_explanation": (string) A brief explanation of the fix applied.
 
 Example JSON Response Format:
+```json
 {{
   "tool_name": "{tool_data.get('tool_name', 'example_tool')}",
   "code": "def {tool_data.get('tool_name', 'example_tool')}(param1, param2=None):\\n    # Corrected code here\\n    # ...\\n    return result",
@@ -39,6 +42,7 @@ Example JSON Response Format:
   "parameters": {{ "param1": {{"type": "string"}}, "param2": {{"type": "integer", "optional": true}} }},
   "fix_explanation": "Added a check for None before accessing attribute X."
 }}
+```
 
 Provide ONLY the JSON object in your response.
 """
@@ -52,7 +56,9 @@ Current Version: {tool_data.get('version', 1)}
 Description: {tool_data.get('description', 'No description provided.')}
 Parameters: {json.dumps(tool_data.get('parameters', {}), indent=2)}
 Current Code:
+```python
 {tool_data.get('code', '# No code provided')}
+```
 User's Improvement Request:
 {improvement_request}
 Task:
@@ -68,6 +74,7 @@ Respond ONLY with a JSON object containing the improved tool information. The JS
 "improvement_summary": (string) A brief summary of the changes made.
 
 Example JSON Response Format:
+```json
 {{
   "tool_name": "{tool_data.get('tool_name', 'example_tool')}",
   "code": "def {tool_data.get('tool_name', 'example_tool')}(param1, new_param='default'):\\n    # Improved code here\\n    # ...\\n    return result",
@@ -75,6 +82,7 @@ Example JSON Response Format:
   "parameters": {{ "param1": {{"type": "string"}}, "new_param": {{"type": "string", "optional": true}} }},
   "improvement_summary": "Added an optional parameter 'new_param' and corresponding logic."
 }}
+```
 
 Provide ONLY the JSON object in your response.
 """
