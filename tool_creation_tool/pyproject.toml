@@ -8,7 +8,8 @@ build-backend = "setuptools.build_meta"
 name = "tool_creation_tool"
 version = "0.1.0"
 authors = [
-  { name="Your Name", email="your.email@example.com" },
+  { name="Dmitry Sukhoruchkin", email="dmitry.sukhoruchkin@neuroidss.com" },
+  { name="Gemini 2.5 Pro" },
 ]
 description = "A library for LLMs to dynamically create, use, store, repair, and improve Python tools."
 readme = "README.md"
@@ -29,6 +30,6 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/your_username/tool_creation_tool" # Replace with actual URL
-"Bug Tracker" = "https://github.com/your_username/tool_creation_tool/issues" # Replace with actual URL
+"Homepage" = "https://github.com/neuroidss/tool_creation_tool" # Replace with actual URL
+"Bug Tracker" = "https://github.com/neuroidss/tool_creation_tool/issues" # Replace with actual URL
 
