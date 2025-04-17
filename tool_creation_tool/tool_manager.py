@@ -58,9 +58,7 @@ Example JSON Response Format:
     }
   }
 }
-content_copy
-download
-Use code with caution.
+```
 Provide ONLY the JSON object in your response.
 """
 return prompt.strip()
