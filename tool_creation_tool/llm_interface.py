@@ -32,9 +32,9 @@ class LLMInterface:
         if not self.model:
             # Provide default models if not specified
             if self.provider == "ollama":
-                self.model = "llama3" # Common default, adjust as needed
+                self.model = "qwen2.5-coder:7b-instruct-q8_0" # Common default, adjust as needed
             elif self.provider == "vllm":
-                self.model = "meta-llama/Llama-2-7b-chat-hf" # Example, adjust
+                self.model = "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF" # Example, adjust
             else: # generic_openai
                  self.model = os.getenv("GENERIC_OPENAI_MODEL", "default-model")
 
