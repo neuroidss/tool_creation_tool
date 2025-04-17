@@ -51,7 +51,6 @@ class LLMInterface:
         self.client = None
         if self.provider in ["vllm", "generic_openai"]:
             # Use OpenAI client for compatible APIs
-             # For OpenAI, key is required. For others, it might be optional ("None", "no_key", etc.)
             effective_api_key = self.api_key if self.api_key else "None"
 
             self.client = OpenAI(
