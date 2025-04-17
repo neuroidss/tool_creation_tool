@@ -29,12 +29,12 @@ LLM_PROVIDER="ollama" # Or "openai", "vllm", etc.
 # Ollama Example (if Ollama running locally)
 OLLAMA_API_KEY="None"
 OLLAMA_BASE_URL="http://localhost:11434"
-OLLAMA_MODEL="llama3" # Replace with your model
+OLLAMA_MODEL="qwen2.5-coder:7b-instruct-q8_0" # Replace with your model
 
 # vLLM Example (replace with your endpoint and model)
 # VLLM_API_KEY="None"
 # VLLM_BASE_URL="http://localhost:8000" # Your vLLM server
-# VLLM_MODEL="meta-llama/Llama-2-7b-chat-hf"
+# VLLM_MODEL="Qwen/Qwen2.5-Coder-7B-Instruct-GGUF"
 
 # Path for ChromaDB storage (optional)
 # CHROMA_PATH="./my_tool_db"
