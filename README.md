@@ -160,12 +160,11 @@ example_self_repair.py: Conceptual demo of library self-repair (prints proposed 
 
 ## Unique Competitive Advantage & Examples
 
-Unlike libraries with static tool definitions (e.g., LangChain Tools, standard function calling), tool_creation_tool enables agents that can adapt and evolve their capabilities at runtime.
-Scenarios impossible without this library:
-Handling Truly Novel Tasks: An agent encounters a request requiring a utility it's never seen (e.g., "Convert this Markdown table to a CSV string"). Instead of failing, it creates the markdown_to_csv tool and uses it.
-Autonomous Bug Fixing: An agent uses a tool (e.g., fetch_weather_data) which suddenly fails due to an API change or an unhandled edge case (e.g., unexpected null value). The ToolManager catches the exception, feeds the code and error back to the LLM via attempt_tool_repair, gets a patched version, stores it, and retries the operation, potentially succeeding without human intervention.
-User-Driven Capability Enhancement: A user tells an agent, "Your 'summarize_text' tool is good, but I need it to focus specifically on extracting action items." The agent uses improve_tool, modifies the underlying function's prompt or logic, and the tool's behavior changes for future use, without developer intervention.
-Adapting to Degraded Environments: If a primary tool fails (e.g., a high-quality translation API goes offline), the agent could potentially create a new tool using a fallback library or a less accurate method to maintain partial functionality.
+Unlike libraries with static tool definitions (e.g., LangChain Tools, standard function calling), tool_creation_tool enables agents that can adapt and evolve their capabilities at runtime. Scenarios impossible without this library:
+*   **Handling Truly Novel Tasks**: An agent encounters a request requiring a utility it's never seen (e.g., "Convert this Markdown table to a CSV string"). Instead of failing, it creates the markdown_to_csv tool and uses it.
+*   **Autonomous Bug Fixing**: An agent uses a tool (e.g., fetch_weather_data) which suddenly fails due to an API change or an unhandled edge case (e.g., unexpected null value). The ToolManager catches the exception, feeds the code and error back to the LLM via attempt_tool_repair, gets a patched version, stores it, and retries the operation, potentially succeeding without human intervention.
+*   **User-Driven Capability Enhancement**: A user tells an agent, "Your 'summarize_text' tool is good, but I need it to focus specifically on extracting action items." The agent uses improve_tool, modifies the underlying function's prompt or logic, and the tool's behavior changes for future use, without developer intervention.
+*   **Adapting to Degraded Environments**: If a primary tool fails (e.g., a high-quality translation API goes offline), the agent could potentially create a new tool using a fallback library or a less accurate method to maintain partial functionality.
 
 ## Unique Future Project Ideas
 
