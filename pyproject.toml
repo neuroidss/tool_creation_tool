@@ -1,0 +1,34 @@
+# tool_creation_tool/pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tool_creation_tool"
+version = "0.1.0"
+authors = [
+  { name="Your Name", email="your.email@example.com" },
+]
+description = "A library for LLMs to dynamically create, use, store, repair, and improve Python tools."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "openai>=1.0.0",
+    "chromadb>=0.4.0",
+    "requests>=2.20.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/your_username/tool_creation_tool" # Replace with actual URL
+"Bug Tracker" = "https://github.com/your_username/tool_creation_tool/issues" # Replace with actual URL
+
