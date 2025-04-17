@@ -27,7 +27,7 @@ Traditional LLM tool usage relies on a fixed set of functions provided by the de
 *   **Safe Execution:** Executes tool code in a controlled manner, capturing output and errors.
 *   **Automated Repair:** Attempts to fix tools that throw exceptions during execution by feeding the error back to the LLM.
 *   **Tool Improvement:** LLM can refactor or enhance existing tools based on requests.
-*   **OpenAI API Compatibility:** Works with OpenAI, Ollama, vLLM, and other endpoints supporting the OpenAI chat completions API format.
+*   **OpenAI API Compatibility:** Works with Ollama, vLLM, and other endpoints supporting the OpenAI chat completions API format.
 *   **Self-Repair Capability (Conceptual):** Includes methods demonstrating how the library could potentially repair its own components (requires extreme caution).
 *   **Extensible:** Designed with clear interfaces for LLM interaction and storage.
 
