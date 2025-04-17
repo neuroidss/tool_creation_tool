@@ -13,7 +13,7 @@ from tool_creation_tool import ToolManager, LLMInterface, ToolStorage
 from dotenv import load_dotenv
 load_dotenv()
 
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama") # Example: "openai", "ollama", "vllm"
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama") # Example: "ollama", "vllm"
 # Add specific API keys/URLs/Models based on the provider in your .env file
 
 # --- Initialization ---
