@@ -185,3 +185,10 @@ Contributions are welcome! Please feel free to submit pull requests or open issu
 
 This project is licensed under the AGPL-3.0 License - see the LICENSE file for details (You would need to create a LICENSE file with the AGPL-3.0 license text).
 
+## vibe coding prompt
+
+```
+turn tool_creation_tool https://github.com/neuroidss/create_function_chat/blob/main/create_tool_chat.py which previously named create_function https://github.com/neuroidss/create_function_chat into separate liblary. so all tools created and used by llm will be with ability to repair and improve by llm. use chromadb for tools storage. make llm calls compatible with openai api like for ollama, vllm for llm calls
+
+provide examples which would not be possible without such library, to show unique competitive advantage of tool_creation_tool library, make sh block of how to install this library and run your examples
+```
