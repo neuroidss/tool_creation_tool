@@ -49,7 +49,7 @@ class LLMInterface:
             self.base_url = os.getenv("OLLAMA_HOST", "http://localhost:11434") # Common Ollama default
 
         self.client = None
-        if self.provider in ["openai", "vllm", "generic_openai"]:
+        if self.provider in ["vllm", "generic_openai"]:
             # Use OpenAI client for compatible APIs
             effective_api_key = self.api_key if self.api_key else "None"
 
