@@ -10,7 +10,7 @@ cd tool_creation_tool
 # 2. Create a virtual environment (recommended)
 echo "Creating virtual environment..."
 python3 -m venv .venv
-source .venv/bin/activate # On Windows use `.\venv\Scripts\activate`
+source .venv/bin/activate
 
 # 3. Install the library and dependencies
 echo "Installing library and dependencies..."
