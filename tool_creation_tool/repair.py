@@ -42,10 +42,10 @@ Example JSON Response Format:
 
 Provide ONLY the JSON object in your response.
 """
-return prompt.strip()
+    return prompt.strip()
 def generate_improvement_prompt(tool_data: Dict[str, Any], improvement_request: str) -> str:
-"""Generates a prompt for the LLM to improve or modify a tool."""
-prompt = f"""
+    """Generates a prompt for the LLM to improve or modify a tool."""
+    prompt = f"""
 Objective: Improve or modify the following Python tool function based on the user's request.
 Tool Name: {tool_data.get('tool_name', 'Unknown')}
 Current Version: {tool_data.get('version', 1)}
@@ -78,14 +78,14 @@ Example JSON Response Format:
 
 Provide ONLY the JSON object in your response.
 """
-return prompt.strip()
+    return prompt.strip()
 def attempt_tool_repair(
-llm_interface: LLMInterface,
-storage: ToolStorage,
-tool_name: str,
-error_message: str
-) -> Optional[Dict[str, Any]]:
-"""
+    llm_interface: LLMInterface,
+    storage: ToolStorage,
+    tool_name: str,
+    error_message: str
+    ) -> Optional[Dict[str, Any]]:
+    """
 Attempts to repair a tool using the LLM.
 Args:
     llm_interface: The LLM interface instance.
@@ -97,69 +97,66 @@ Returns:
     A dictionary with the details of the repaired tool (including new code, version, etc.)
     if successful and validated, otherwise None.
 """
-print(f"Attempting to repair tool: {tool_name}")
-original_tool = storage.get_tool(tool_name)
-if not original_tool:
-    print(f"Error: Tool '{tool_name}' not found for repair.")
-    return None
+    print(f"Attempting to repair tool: {tool_name}")
+    original_tool = storage.get_tool(tool_name)
+    if not original_tool:
+        print(f"Error: Tool '{tool_name}' not found for repair.")
+        return None
 
-prompt = generate_repair_prompt(original_tool, error_message)
-messages = [{"role": "user", "content": prompt}]
+    prompt = generate_repair_prompt(original_tool, error_message)
+    messages = [{"role": "user", "content": prompt}]
 
-# Request JSON mode if possible
-llm_response = llm_interface.get_completion(messages, json_mode=True)
+    # Request JSON mode if possible
+    llm_response = llm_interface.get_completion(messages, json_mode=True)
 
-if not llm_response:
-    print("Error: Failed to get repair suggestion from LLM.")
-    return None
+    if not llm_response:
+        print("Error: Failed to get repair suggestion from LLM.")
+        return None
 
-parsed_response = parse_llm_tool_creation_response(llm_response) # Use the same parser
+    parsed_response = parse_llm_tool_creation_response(llm_response) # Use the same parser
 
-if not parsed_response or "code" not in parsed_response:
-    print("Error: Failed to parse LLM repair response or missing 'code'.")
-    print(f"LLM raw response snippet: {llm_response[:200]}...")
-    return None
+    if not parsed_response or "code" not in parsed_response:
+        print("Error: Failed to parse LLM repair response or missing 'code'.")
+        print(f"LLM raw response snippet: {llm_response[:200]}...")
+        return None
 
-repaired_code = parsed_response["code"]
-if not validate_python_code(repaired_code):
-    print("Error: LLM generated repaired code with invalid syntax.")
-    # Optionally: Could try to ask the LLM to fix the syntax error here
-    return None
+    repaired_code = parsed_response["code"]
+    if not validate_python_code(repaired_code):
+        print("Error: LLM generated repaired code with invalid syntax.")
+        # Optionally: Could try to ask the LLM to fix the syntax error here
+        return None
 
-# Prepare the updated tool data for storage
-updated_tool_data = {
-    "tool_name": original_tool["tool_name"], # Keep original name
-    "code": repaired_code,
-    "description": parsed_response.get("description", original_tool["description"]),
-    "parameters": parsed_response.get("parameters", original_tool["parameters"]),
-    "version": original_tool.get("version", 1) + 1, # Increment version
-    "error_log": [], # Clear error log after successful repair attempt
-    "fix_explanation": parsed_response.get("fix_explanation", "No explanation provided.")
-}
+    # Prepare the updated tool data for storage
+    updated_tool_data = {
+        "tool_name": original_tool["tool_name"], # Keep original name
+        "code": repaired_code,
+        "description": parsed_response.get("description", original_tool["description"]),
+        "parameters": parsed_response.get("parameters", original_tool["parameters"]),
+        "version": original_tool.get("version", 1) + 1, # Increment version
+        "error_log": [], # Clear error log after successful repair attempt
+        "fix_explanation": parsed_response.get("fix_explanation", "No explanation provided.")
+    }
 
-# Store the updated tool
-storage.add_or_update_tool(
-    tool_name=updated_tool_data["tool_name"],
-    code=updated_tool_data["code"],
-    description=updated_tool_data["description"],
-    parameters=updated_tool_data["parameters"],
-    version=updated_tool_data["version"],
-    error_log=updated_tool_data["error_log"]
-)
+    # Store the updated tool
+    storage.add_or_update_tool(
+        tool_name=updated_tool_data["tool_name"],
+        code=updated_tool_data["code"],
+        description=updated_tool_data["description"],
+        parameters=updated_tool_data["parameters"],
+        version=updated_tool_data["version"],
+        error_log=updated_tool_data["error_log"]
+    )
 
-print(f"Tool '{tool_name}' successfully repaired and updated to version {updated_tool_data['version']}.")
-print(f"LLM Fix Explanation: {updated_tool_data['fix_explanation']}")
-return updated_tool_data # Return the full data of the repaired tool
-content_copy
-download
-Use code with caution.
+    print(f"Tool '{tool_name}' successfully repaired and updated to version {updated_tool_data['version']}.")
+    print(f"LLM Fix Explanation: {updated_tool_data['fix_explanation']}")
+    return updated_tool_data # Return the full data of the repaired tool
 def attempt_tool_improvement(
-llm_interface: LLMInterface,
-storage: ToolStorage,
-tool_name: str,
-improvement_request: str
-) -> Optional[Dict[str, Any]]:
-"""
+    llm_interface: LLMInterface,
+    storage: ToolStorage,
+    tool_name: str,
+    improvement_request: str
+    ) -> Optional[Dict[str, Any]]:
+    """
 Attempts to improve a tool using the LLM based on a request.
 Args:
     llm_interface: The LLM interface instance.
@@ -171,45 +168,45 @@ Returns:
     A dictionary with the details of the improved tool (including new code, version, etc.)
     if successful and validated, otherwise None.
 """
-print(f"Attempting to improve tool: {tool_name}")
-original_tool = storage.get_tool(tool_name)
-if not original_tool:
-    print(f"Error: Tool '{tool_name}' not found for improvement.")
-    return None
+    print(f"Attempting to improve tool: {tool_name}")
+    original_tool = storage.get_tool(tool_name)
+    if not original_tool:
+        print(f"Error: Tool '{tool_name}' not found for improvement.")
+        return None
 
-prompt = generate_improvement_prompt(original_tool, improvement_request)
-messages = [{"role": "user", "content": prompt}]
+    prompt = generate_improvement_prompt(original_tool, improvement_request)
+    messages = [{"role": "user", "content": prompt}]
 
-# Request JSON mode if possible
-llm_response = llm_interface.get_completion(messages, json_mode=True)
+    # Request JSON mode if possible
+    llm_response = llm_interface.get_completion(messages, json_mode=True)
 
-if not llm_response:
-    print("Error: Failed to get improvement suggestion from LLM.")
-    return None
+    if not llm_response:
+        print("Error: Failed to get improvement suggestion from LLM.")
+        return None
 
-parsed_response = parse_llm_tool_creation_response(llm_response)
+    parsed_response = parse_llm_tool_creation_response(llm_response)
 
-if not parsed_response or "code" not in parsed_response:
-    print("Error: Failed to parse LLM improvement response or missing 'code'.")
-    print(f"LLM raw response snippet: {llm_response[:200]}...")
-    return None
+    if not parsed_response or "code" not in parsed_response:
+        print("Error: Failed to parse LLM improvement response or missing 'code'.")
+        print(f"LLM raw response snippet: {llm_response[:200]}...")
+        return None
 
-improved_code = parsed_response["code"]
-if not validate_python_code(improved_code):
-    print("Error: LLM generated improved code with invalid syntax.")
-    return None
+    improved_code = parsed_response["code"]
+    if not validate_python_code(improved_code):
+        print("Error: LLM generated improved code with invalid syntax.")
+        return None
 
-# Prepare the updated tool data for storage
-updated_tool_data = {
-     # Allow LLM to potentially suggest a name change if significant
-    "tool_name": parsed_response.get("tool_name", original_tool["tool_name"]),
-    "code": improved_code,
-    "description": parsed_response.get("description", original_tool["description"]),
-    "parameters": parsed_response.get("parameters", original_tool["parameters"]),
-    "version": original_tool.get("version", 1) + 1, # Increment version
-    "error_log": original_tool.get("error_log", []), # Keep existing error log unless cleared
-    "improvement_summary": parsed_response.get("improvement_summary", "No summary provided.")
-}
+    # Prepare the updated tool data for storage
+    updated_tool_data = {
+         # Allow LLM to potentially suggest a name change if significant
+        "tool_name": parsed_response.get("tool_name", original_tool["tool_name"]),
+        "code": improved_code,
+        "description": parsed_response.get("description", original_tool["description"]),
+        "parameters": parsed_response.get("parameters", original_tool["parameters"]),
+        "version": original_tool.get("version", 1) + 1, # Increment version
+        "error_log": original_tool.get("error_log", []), # Keep existing error log unless cleared
+        "improvement_summary": parsed_response.get("improvement_summary", "No summary provided.")
+    }
 
  # If name changed, potentially delete old entry? Or handle as rename?
  # For now, upsert will overwrite if ID matches, or create new if name (and thus ID) changes.
