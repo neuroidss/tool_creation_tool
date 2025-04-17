@@ -8,8 +8,8 @@ build-backend = "setuptools.build_meta"
 name = "tool_creation_tool"
 version = "0.1.0"
 authors = [
-  { name="Dmitry Sukhoruchkin", email="dmitry.sukhoruchkin@neuroidss.com" },
   { name="Gemini 2.5 Pro" },
+  { name="Dmitry Sukhoruchkin", email="dmitry.sukhoruchkin@neuroidss.com" },
 ]
 description = "A library for LLMs to dynamically create, use, store, repair, and improve Python tools."
 readme = "README.md"
