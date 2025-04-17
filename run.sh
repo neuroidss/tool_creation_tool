@@ -4,7 +4,7 @@
 
 # 1. Clone the repository (replace with your actual URL if different)
 echo "Cloning repository..."
-git clone https://github.com/your_username/tool_creation_tool.git
+git clone https://github.com/neuroidss/tool_creation_tool.git
 cd tool_creation_tool
 
 # 2. Create a virtual environment (recommended)
@@ -30,10 +30,6 @@ LLM_PROVIDER="ollama" # Or "openai", "vllm", etc.
 OLLAMA_API_KEY="None"
 OLLAMA_BASE_URL="http://localhost:11434"
 OLLAMA_MODEL="llama3" # Replace with your model
-
-# OpenAI Example (replace with your key)
-# OPENAI_API_KEY="sk-YOUR_API_KEY"
-# OPENAI_MODEL="gpt-4-turbo-preview"
 
 # vLLM Example (replace with your endpoint and model)
 # VLLM_API_KEY="None"
